@@ -1,0 +1,18 @@
+# Prevent viewing of htaccess file
+<Files ~ "^\\.ht">
+order allow,deny
+deny from all
+satisfy all
+</Files>
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+RewriteRule ^/?schedule/.+?\.php / [NC,L,R=302]
+
+
+
+
+
