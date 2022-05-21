@@ -1,6 +1,6 @@
 $('#login_form').on("submit", function(e){
-    var formData = new FormData($(this)[0]);
     e.preventDefault();
+    var formData = new FormData($(this)[0]);
     $.ajax({
         url: 'function.php?login_validate',
         type: 'POST',
@@ -42,11 +42,16 @@ $('#login_form').on("submit", function(e){
 function swal_message(msg_type,msg){
     var Toast = Swal.mixin({
         toast: true,
-        position: 'top-end',
+        animation: false,
+        position: "top-end",
         showConfirmButton: false,
-        timer: 3000
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        }
       });
-
     Toast.fire({
         icon: msg_type,
         title: msg
@@ -83,11 +88,11 @@ function adduser()
 }
 
 $('#user_settings').on("submit", function(e){
-    var formData = new FormData($(this)[0]);
     e.preventDefault();
-    var uname = $("[name='uname']").val();
-    var username = $("[name='username']").val();
-    var password = $("[name='password']").val();
+    var formData = new FormData($(this)[0]);
+    //var uname = $("[name='uname']").val();
+    //var username = $("[name='username']").val();
+    //var password = $("[name='password']").val();
     var curpassword = $("[name='current_password']").val();
     var newpass = $("[name='new_password']").val();
     var confirmpass = $("[name='confirm_password']").val();
@@ -114,7 +119,7 @@ $('#user_settings').on("submit", function(e){
         }
         if(newpass!=confirmpass)
         {
-            swal_message('error','Password does not match');
+            swal_message('error','Password did not match');
             return false;
         }
     }
@@ -154,8 +159,33 @@ $('#user_settings').on("submit", function(e){
 });
 
 $('#add_user').on("submit", function(e){
-    var formData = new FormData($(this)[0]);
     e.preventDefault();
+    var formData = new FormData($(this)[0]);
+    var name = $("[name='fullname']").val();
+    var username = $("[name='username']").val();
+    var pass = $("[name='password']").val();
+    var confirmpass = $("[name='confirm_password']").val();
+    if(name==''){
+        swal_message('error','Fullname is empty')
+        return false;
+    }
+    if(username==''){
+        swal_message('error','Username is empty')
+        return false;
+    }
+    if(pass==''){
+        swal_message('error','Password is empty')
+        return false;
+    }
+    if(confirmpass==''){
+        swal_message('error','Confirm password is empty')
+        return false;
+    }
+    if(pass!=confirmpass){
+        swal_message('error','Password did not match')
+        return false;
+    }
+    
     $.ajax({
         url: 'function.php?insert_user',
         type: 'POST',
@@ -273,8 +303,19 @@ function edituser(ids,ids2)
 }
 
 $('#edit_user').on("submit", function(e){
-    var formData = new FormData($(this)[0]);
     e.preventDefault();
+    var formData = new FormData($(this)[0]);
+    var name = $("[name='fullname']").val();
+    var username = $("[name='username']").val();
+    if(name==''){
+        swal_message('error','Fullname is empty')
+        return false;
+    }
+    if(username==''){
+        swal_message('error','Username is empty')
+        return false;
+    }
+    
     $.ajax({
         url: 'function.php?update_user',
         type: 'POST',
@@ -317,8 +358,13 @@ function addsports()
 }
 
 $('#add_sports').on("submit", function(e){
-    var formData = new FormData($(this)[0]);
     e.preventDefault();
+    var formData = new FormData($(this)[0]);
+    var sport = $("[name='sportsname']").val();
+    if(sport==''){
+        swal_message('error','Sport is empty');
+        return false;
+    }
     $.ajax({
         url: 'function.php?insert_sports',
         type: 'POST',
@@ -362,8 +408,13 @@ function editsports(ids)
 }
 
 $('#edit_sports').on("submit", function(e){
-    var formData = new FormData($(this)[0]);
     e.preventDefault();
+    var formData = new FormData($(this)[0]);
+    var sport = $("[name='sportsname']").val();
+    if(sport==''){
+        swal_message('error','Sport is empty');
+        return false;
+    }
     $.ajax({
         url: 'function.php?update_sports',
         type: 'POST',
@@ -436,8 +487,8 @@ function addevents()
 }
 
 $('#add_events').on("submit", function(e){
-    var formData = new FormData($(this)[0]);
     e.preventDefault();
+    var formData = new FormData($(this)[0]);
     $.ajax({
         url: 'function.php?insert_events',
         type: 'POST',
@@ -481,8 +532,8 @@ function editevents(ids)
 }
 
 $('#edit_events').on("submit", function(e){
-    var formData = new FormData($(this)[0]);
     e.preventDefault();
+    var formData = new FormData($(this)[0]);
     $.ajax({
         url: 'function.php?update_events',
         type: 'POST',
@@ -555,8 +606,18 @@ function addvenue()
 }
 
 $('#add_venue').on("submit", function(e){
-    var formData = new FormData($(this)[0]);
     e.preventDefault();
+    var formData = new FormData($(this)[0]);
+    var venue = $("[name='venuename']").val();
+    var address = $("[name='address']").val();
+    if(venue==''){
+        swal_message('error','Venue is empty');
+        return false;
+    }
+    if(address==''){
+        swal_message('error','Address is empty');
+        return false;
+    }
     $.ajax({
         url: 'function.php?insert_venue',
         type: 'POST',
@@ -600,8 +661,18 @@ function editvenue(ids)
 }
 
 $('#edit_venue').on("submit", function(e){
-    var formData = new FormData($(this)[0]);
     e.preventDefault();
+    var formData = new FormData($(this)[0]);
+    var venue = $("[name='venuename']").val();
+    var address = $("[name='address']").val();
+    if(venue==''){
+        swal_message('error','Venue is empty');
+        return false;
+    }
+    if(address==''){
+        swal_message('error','Address is empty');
+        return false;
+    }
     $.ajax({
         url: 'function.php?update_venue',
         type: 'POST',
@@ -674,14 +745,34 @@ function addteam()
 }
 
 $('#add_team').on("submit", function(e){
+    e.preventDefault();
     var formData = new FormData($(this)[0]);
+    var name = $("[name='teamname']").val();
+    var acro = $("[name='teamacro']").val();
+    var coach = $("[name='coach']").val();
+    var contact = $("[name='coach_contact']").val();
     var contact_no = document.getElementById('coach_contact').value;
-    if(contact_no.length < 11 || contact_no.length > 11)
-    {
-        swal_message('error','Invalid Mobile No.!');
+    if(name==''){
+        swal_message('error','Name is empty');
         return false;
     }
-    e.preventDefault();
+    if(acro==''){
+        swal_message('error','Acronym is empty');
+        return false;
+    }
+    if(coach==''){
+        swal_message('error','In-charge Name is empty');
+        return false;
+    }
+    if(contact==''){
+        swal_message('error','Mobile number is empty');
+        return false;
+    }
+    if(contact_no.length < 11 || contact_no.length > 11)
+    {
+        swal_message('error','Invalid mobile number');
+        return false;
+    }
     $.ajax({
         url: 'function.php?insert_team',
         type: 'POST',
@@ -747,14 +838,34 @@ function editteam(ids)
 }
 
 $('#edit_team').on("submit", function(e){
+    e.preventDefault();
     var formData = new FormData($(this)[0]);
+    var name = $("[name='teamname']").val();
+    var acro = $("[name='teamacro']").val();
+    var coach = $("[name='coach']").val();
+    var contact = $("[name='coach_contact']").val();
     var contact_no = document.getElementById('coach_contact').value;
+    if(name==''){
+        swal_message('error','Name is empty');
+        return false;
+    }
+    if(acro==''){
+        swal_message('error','Acronym is empty');
+        return false;
+    }
+    if(coach==''){
+        swal_message('error','In-charge name is empty');
+        return false;
+    }
+    if(contact==''){
+        swal_message('error','Contact number is empty');
+        return false;
+    }
     if(contact_no.length < 11 || contact_no.length > 11)
     {
         swal_message('error','Invalid mobile number');
         return false;
     }
-    e.preventDefault();
     $.ajax({
         url: 'function.php?update_team',
         type: 'POST',
@@ -929,15 +1040,14 @@ function submittournament()
                     alert('Something is wrong');
                 },
                 success: function(data) {       
-                    // $("#debug").html(data);
                     if(data=='exist')
                     {
-                        swal_message('error','Tournament already exist with the same tournament duration');
+                        swal_message('error','Tournament already exist with the same duration');
                     }
                     else
                     {
                         $("#addTournamentModal").modal("hide");
-                        swal_message('success','Tournament successfully added!');
+                        swal_message('success','Tournament successfully added');
                         setTimeout(function(){
                             window.location.reload();
                         }, 1000);
@@ -967,7 +1077,7 @@ function submitteamevent()
     }
     if (contact_no=="")
     {
-        swal_message('error','Contact No. is empty');
+        swal_message('error','Mobile number is empty');
         return false;
     }
     else if(contact.length < 11 || contact.length > 11)
@@ -1055,19 +1165,19 @@ function submitevent()
     }
     if (type=="")
     {
-        swal_message('error','Tournament Type is empty');
+        swal_message('error','Tournament type is empty');
         return false;
     }
     if(count==0)
     {
-        swal_message('error','No Participant selected');
+        swal_message('error','No participant selected');
         return false;
     }
     if(type=="Single Elimination")
     {
         if(count<2)
         {
-            swal_message('error','Minimum Participants in '+type+' is 2!');
+            swal_message('error','Minimum participants in '+type+' is 2');
             return false;
         }
     }
@@ -1075,14 +1185,14 @@ function submitevent()
     {
         if(count<3)
         {
-            swal_message('error','Minimum Participants in '+type+' is 3!');
+            swal_message('error','Minimum participants in '+type+' is 3');
             return false;
         }
     }
     
     if(count>16)
     {
-        swal_message('error','Maximum Participants is 16');
+        swal_message('error','Maximum participants is 16');
         return false;
     }
     if(type=="Single Elimination")
@@ -1237,7 +1347,7 @@ function submiteditteamevent()
     }
     if (contact_no=="")
     {
-        swal_message('error','Contact No. is empty');
+        swal_message('error','Mobile number is empty');
         return false;
     }
     if(contact.length < 11 || contact.length > 11)

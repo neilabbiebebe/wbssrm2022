@@ -30,7 +30,7 @@
                     <h1 class="h4 text-gray-900 mb-4">Web-based Sports Scheduling and Result Monitoring</h1>
                   </div>
                   <hr></hr>
-                  <div class="alert alert-danger" id="msg" role="alert" style="display: none">Incorrect username or password!</div>
+                  <div class="alert alert-danger" id="msg" role="alert" style="display: none">Incorrect username or password</div>
                   <div class="alert alert-danger" id="msg2" role="alert" style="display: none">User is Inactive!</div>
                   <form method="post" id="login_form">
                     <div class="form-group">

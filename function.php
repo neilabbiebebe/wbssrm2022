@@ -125,13 +125,13 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Full Name</span>
             </div>
-            <input type="text" class="form-control" name="fullname" id="fullname" autocomplete="off" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" required>
+            <input type="text" class="form-control" name="fullname" id="fullname" autocomplete="off" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" >
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Username</span>
             </div>
-            <input style="width:110px" type="text" class="form-control" name="username" id="username" autocomplete="off" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" required>
+            <input style="width:110px" type="text" class="form-control" name="username" id="username" autocomplete="off" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" >
             <div class="input-group-prepend">
                 <span class="input-group-text">Status</span>
             </div>
@@ -193,13 +193,13 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Full Name</span>
             </div>
-            <input type="text" class="form-control" name="fullname" id="fullname" autocomplete="off" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$row['full_name'].'" required>
+            <input type="text" class="form-control" name="fullname" id="fullname" autocomplete="off" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$row['full_name'].'" >
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Username</span>
             </div>
-            <input style="width:110px" type="text" class="form-control" name="username" id="username" value="'.$row['username'].'" autocomplete="off" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" required>
+            <input style="width:110px" type="text" class="form-control" name="username" id="username" value="'.$row['username'].'" autocomplete="off" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" >
             <div class="input-group-prepend">
                 <span class="input-group-text">Status</span>
             </div>
@@ -236,19 +236,19 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Sport Name</span>
             </div>
-            <input type="text" class="form-control" name="sportsname" id="sportsname" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" autocomplete="off" required>
+            <input type="text" class="form-control" name="sportsname" id="sportsname" style="text-transform:uppercase" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" autocomplete="off" >
         </div>
         <button style="float: right" class="btn btn-secondary" data-dismiss="modal"> Close </button>
         <button type="submit" style="float: right;margin-right: 5px" class="btn btn-primary" name="submit" value="save"> Save </button>';
     }
     elseif(isset($_GET['insert_sports'])){
-        $query1 = "SELECT * FROM sports WHERE sports_name='".$_POST['sportsname']."'";
+        $query1 = "SELECT * FROM sports WHERE sports_name='".strtoupper($_POST['sportsname'])."'";
         $result1=mysql_query($query1,$conn) or die(mysql_error());
         if(mysql_num_rows($result1) > 0){
             echo 'exist';
         }
         else{
-            $query = "INSERT INTO sports VALUES(null,'".$_POST['sportsname']."')";
+            $query = "INSERT INTO sports VALUES(null,'".strtoupper($_POST['sportsname'])."')";
             mysql_query($query,$conn) or die(mysql_error());
 
             echo 'okay';
@@ -264,7 +264,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Sport Name</span>
             </div>
-            <input type="text" class="form-control" name="sportsname" id="sportsname" autocomplete="off" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$row['sports_name'].'" required>
+            <input type="text" class="form-control" name="sportsname" id="sportsname" autocomplete="off" style="text-transform:uppercase" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$row['sports_name'].'" >
         </div>
         <button style="float: right" class="btn btn-secondary" data-dismiss="modal"> Close </button>
         <button type="submit" style="float: right;margin-right: 5px" class="btn btn-primary" name="submit" value="save"> Save </button>';
@@ -272,7 +272,7 @@
     elseif(isset($_GET['update_sports'])){
         $flag = 0;
         if($_POST['sname']!=$_POST['sportsname']){
-            $query1 = "SELECT * FROM sports WHERE sports_name='".$_POST['sportsname']."' AND sports_id!=".$_POST['id']."";
+            $query1 = "SELECT * FROM sports WHERE sports_name='".strtoupper($_POST['sportsname'])."' AND sports_id!=".$_POST['id']."";
             $result1=mysql_query($query1,$conn) or die(mysql_error());
             if(mysql_num_rows($result1) > 0){
                 echo 'exist';
@@ -280,7 +280,7 @@
             }
         }
         if($flag==0){
-            $query3 = "UPDATE sports SET sports_name='".$_POST['sportsname']."' WHERE sports_id=".$_POST['id']."";
+            $query3 = "UPDATE sports SET sports_name='".strtoupper($_POST['sportsname'])."' WHERE sports_id=".$_POST['id']."";
             mysql_query($query3,$conn) or die(mysql_error());
 
             echo 'sports';
@@ -358,25 +358,25 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Venue Name</span>
             </div>
-            <input type="text" class="form-control" name="venuename" id="venuename" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" autocomplete="off" required>
+            <input type="text" class="form-control" name="venuename" id="venuename" style="text-transform:uppercase" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" autocomplete="off" >
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Venue Address</span>
             </div>
-            <input type="text" class="form-control" name="address" id="address" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" autocomplete="off" required>
+            <input type="text" class="form-control" name="address" id="address" style="text-transform:uppercase" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" autocomplete="off" >
         </div>
         <button style="float: right" class="btn btn-secondary" data-dismiss="modal"> Close </button>
         <button type="submit" style="float: right;margin-right: 5px" class="btn btn-primary" name="submit" value="save"> Save </button>';
     }
     elseif(isset($_GET['insert_venue'])){
-        $query1 = "SELECT * FROM venue WHERE venue_name='".$_POST['venuename']."'";
+        $query1 = "SELECT * FROM venue WHERE venue_name='".strtoupper($_POST['venuename'])."'";
         $result1=mysql_query($query1,$conn) or die(mysql_error());
         if(mysql_num_rows($result1) > 0){
             echo 'exist';
         }
         else{
-            $query = "INSERT INTO venue VALUES(null,'".$_POST['venuename']."','".$_POST['address']."')";
+            $query = "INSERT INTO venue VALUES(null,'".strtoupper($_POST['venuename'])."','".strtoupper($_POST['address'])."')";
             mysql_query($query,$conn) or die(mysql_error());
 
             echo 'okay';
@@ -392,13 +392,13 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Venue Name</span>
             </div>
-            <input type="text" class="form-control" name="venuename" id="venuename" autocomplete="off" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$row['venue_name'].'" required>
+            <input type="text" class="form-control" name="venuename" id="venuename" autocomplete="off" style="text-transform:uppercase" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$row['venue_name'].'" >
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Venue Address</span>
             </div>
-            <input type="text" class="form-control" name="address" id="address" autocomplete="off" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$row['venue_address'].'" required>
+            <input type="text" class="form-control" name="address" id="address" autocomplete="off" style="text-transform:uppercase" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$row['venue_address'].'" >
         </div>
         <button style="float: right" class="btn btn-secondary" data-dismiss="modal"> Close </button>
         <button type="submit" style="float: right;margin-right: 5px" class="btn btn-primary" name="submit" value="save"> Save </button>';
@@ -406,7 +406,7 @@
     elseif(isset($_GET['update_venue'])){
         $flag = 0;
         if($_POST['vname']!=$_POST['venuename']){
-            $query1 = "SELECT * FROM venue WHERE venue_name='".$_POST['venuename']."' AND venue_id!=".$_POST['id']."";
+            $query1 = "SELECT * FROM venue WHERE venue_name='".strtoupper($_POST['venuename'])."' AND venue_id!=".$_POST['id']."";
             $result1=mysql_query($query1,$conn) or die(mysql_error());
             if(mysql_num_rows($result1) > 0){
                 echo 'exist';
@@ -414,7 +414,7 @@
             }
         }
         if($flag==0){
-            $query3 = "UPDATE venue SET venue_name='".$_POST['venuename']."',venue_address='".$_POST['address']."' WHERE venue_id=".$_POST['id']."";
+            $query3 = "UPDATE venue SET venue_name='".strtoupper($_POST['venuename'])."',venue_address='".strtoupper($_POST['address'])."' WHERE venue_id=".$_POST['id']."";
             mysql_query($query3,$conn) or die(mysql_error());
 
             echo 'venue';
@@ -431,25 +431,25 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Name</span>
             </div>
-            <input type="text" class="form-control" name="teamname" id="teamname" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" autocomplete="off" required>
+            <input type="text" class="form-control" name="teamname" id="teamname" style="text-transform:uppercase" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" autocomplete="off" >
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Acronym</span>
             </div>
-            <input type="text" class="form-control" name="teamacro" id="teamacro" maxlength="10" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" autocomplete="off" required>
+            <input type="text" class="form-control" name="teamacro" id="teamacro" maxlength="25" style="text-transform:uppercase" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" autocomplete="off" >
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">In-Charge Name</span>
             </div>
-            <input type="text" class="form-control" name="coach" id="coach" autocomplete="off" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" required>
+            <input type="text" class="form-control" name="coach" id="coach" autocomplete="off" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" >
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">In-Charge Mobile No.</span>
             </div>
-            <input type="text" class="form-control" name="coach_contact" id="coach_contact" onkeypress="return event.charCode >= 48 && event.charCode <= 57" autocomplete="off" required>
+            <input type="text" class="form-control" name="coach_contact" id="coach_contact" onkeypress="return event.charCode >= 48 && event.charCode <= 57" autocomplete="off" >
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -477,13 +477,13 @@
                     echo "invalid";
                 }
                 else{
-                    $query1 = "SELECT * FROM team WHERE team_name='".$_POST['teamname']."'";
+                    $query1 = "SELECT * FROM team WHERE team_name='".strtoupper($_POST['teamname'])."'";
                     $result1=mysql_query($query1,$conn) or die(mysql_error());
                     if(mysql_num_rows($result1) > 0){
                         echo 'exist';
                     }
                     else{
-                        $query = "INSERT INTO team VALUES(null,'".$_POST['teamname']."','".strtoupper($_POST['teamacro'])."','".$_POST['coach']."','".$_POST['coach_contact']."','".$_FILES['logo']['name']."')";
+                        $query = "INSERT INTO team VALUES(null,'".strtoupper($_POST['teamname'])."','".strtoupper($_POST['teamacro'])."','".$_POST['coach']."','".$_POST['coach_contact']."','".$_FILES['logo']['name']."')";
                         mysql_query($query,$conn) or die(mysql_error());
 
                         move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
@@ -504,25 +504,25 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Name</span>
             </div>
-            <input type="text" class="form-control" name="teamname" id="teamname" autocomplete="off" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$row['team_name'].'" required>
+            <input type="text" class="form-control" name="teamname" id="teamname" autocomplete="off" style="text-transform:uppercase" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$row['team_name'].'">
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Acronym</span>
             </div>
-            <input type="text" class="form-control" name="teamacro" id="teamacro" autocomplete="off" maxlength="10" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$row['team_acro'].'" required>
+            <input type="text" class="form-control" name="teamacro" id="teamacro" autocomplete="off" maxlength="25" style="text-transform:uppercase" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$row['team_acro'].'">
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">In-Charge Name</span>
             </div>
-            <input type="text" class="form-control" name="coach" id="coach" autocomplete="off" value="'.$row['team_coach'].'" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" required>
+            <input type="text" class="form-control" name="coach" id="coach" autocomplete="off" value="'.$row['team_coach'].'" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" >
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">In-Charge Mobile No.</span>
             </div>
-            <input type="text" class="form-control" name="coach_contact" id="coach_contact" autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="'.$row['coach_contact'].'" required>
+            <input type="text" class="form-control" name="coach_contact" id="coach_contact" autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="'.$row['coach_contact'].'" >
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -561,7 +561,7 @@
                 else{
                     $flag = 0;
                     if($_POST['tname']!=$_POST['teamname']){
-                        $query1 = "SELECT * FROM team WHERE team_name='".$_POST['teamname']."' AND team_id!=".$_POST['id']."";
+                        $query1 = "SELECT * FROM team WHERE team_name='".strtoupper($_POST['teamname'])."' AND team_id!=".$_POST['id']."";
                         $result1=mysql_query($query1,$conn) or die(mysql_error());
                         if(mysql_num_rows($result1) > 0){
                             echo 'exist';
@@ -570,9 +570,9 @@
                     }
                     if($flag==0){
                         if($logo_empty==1){
-                            $query3 = "UPDATE team SET team_name='".$_POST['teamname']."',team_acro='".strtoupper($_POST['teamacro'])."',team_coach='".$_POST['coach']."',coach_contact='".$_POST['coach_contact']."',logo='".$_FILES['logo']['name']."' WHERE team_id=".$_POST['id']."";
+                            $query3 = "UPDATE team SET team_name='".strtoupper($_POST['teamname'])."',team_acro='".strtoupper($_POST['teamacro'])."',team_coach='".$_POST['coach']."',coach_contact='".$_POST['coach_contact']."',logo='".$_FILES['logo']['name']."' WHERE team_id=".$_POST['id']."";
                         }else{
-                            $query3 = "UPDATE team SET team_name='".$_POST['teamname']."',team_acro='".strtoupper($_POST['teamacro'])."',team_coach='".$_POST['coach']."',coach_contact='".$_POST['coach_contact']."' WHERE team_id=".$_POST['id']."";
+                            $query3 = "UPDATE team SET team_name='".strtoupper($_POST['teamname'])."',team_acro='".strtoupper($_POST['teamacro'])."',team_coach='".$_POST['coach']."',coach_contact='".$_POST['coach_contact']."' WHERE team_id=".$_POST['id']."";
                         }
                         
                         mysql_query($query3,$conn) or die(mysql_error());
@@ -603,7 +603,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Name</span>
             </div>
-            <input type="text" class="form-control" name="tname" id="tname" autocomplete="off" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" required>
+            <input type="text" class="form-control" name="tname" id="tname" autocomplete="off" style="text-transform:uppercase" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" required>
         </div>
         <div class="form-group" id="simple-date4">
             <label for="dateRangePicker">Tournament Duration</label>
@@ -621,19 +621,19 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Organizer</span>
             </div>
-            <input type="text" class="form-control" name="organizer" id="organizer" autocomplete="off" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" required>
+            <input type="text" class="form-control" name="organizer" id="organizer" autocomplete="off" style="text-transform:uppercase" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" required>
         </div>';
         echo '<button style="float: right" class="btn btn-secondary" data-dismiss="modal"> Close </button>
         <button type="button" style="float: right;margin-right: 5px" class="btn btn-primary" name="submit" value="save" onclick=submittournament()> Save </button>';
     }
     elseif(isset($_GET['save_tournament'])){
-        $query1 = "SELECT * FROM tournament WHERE tournament_name='".$_POST['tname']."' AND start_date='".$_POST['tstart']."' AND end_date='".$_POST['tend']."'";
+        $query1 = "SELECT * FROM tournament WHERE tournament_name='".strtoupper($_POST['tname'])."' AND start_date='".$_POST['tstart']."' AND end_date='".$_POST['tend']."'";
         $result1=mysql_query($query1,$conn) or die(mysql_error());
         if(mysql_num_rows($result1) > 0){
             echo 'exist';
         }
         else{
-            $query = "INSERT INTO tournament VALUES(null,'".$_POST['tname']."','".$_POST['tstart']."','".$_POST['tend']."','".$_POST['desc']."','".$_POST['organizer']."','".$date1."')";
+            $query = "INSERT INTO tournament VALUES(null,'".strtoupper($_POST['tname'])."','".$_POST['tstart']."','".$_POST['tend']."','".$_POST['desc']."','".strtoupper($_POST['organizer'])."','".$date1."')";
             mysql_query($query,$conn) or die(mysql_error());
 
             echo 'okay';
@@ -839,7 +839,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Name</span>
             </div>
-            <input type="text" class="form-control" name="tname" id="tname" autocomplete="off" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$result['tournament_name'].'" required>
+            <input type="text" class="form-control" name="tname" id="tname" autocomplete="off" style="text-transform:uppercase" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$result['tournament_name'].'">
         </div>
         <div class="form-group" id="simple-date4">
             <label for="dateRangePicker">Tournament Duration</label>
@@ -857,13 +857,13 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Organizer</span>
             </div>
-            <input type="text" class="form-control" name="organizer" id="organizer" autocomplete="off" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$result['organizer'].'" required>
+            <input type="text" class="form-control" name="organizer" id="organizer" autocomplete="off" style="text-transform:uppercase" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" value="'.$result['organizer'].'" >
         </div>';
         echo '<button style="float: right" class="btn btn-secondary" data-dismiss="modal"> Close </button>
         <button type="button" style="float: right;margin-right: 5px" class="btn btn-primary" name="submit" value="save" onclick=submitedittournament()> Save Changes</button>';
     }
     elseif(isset($_GET['update_tournament'])){
-        $query5 = "UPDATE tournament SET tournament_name='".$_POST['tname']."',start_date='".$_POST['tstart']."',end_date='".$_POST['tend']."',description='".$_POST['desc']."',organizer='".$_POST['organizer']."' WHERE tournament_id=".$_POST['ids']."";
+        $query5 = "UPDATE tournament SET tournament_name='".strtoupper($_POST['tname'])."',start_date='".$_POST['tstart']."',end_date='".$_POST['tend']."',description='".$_POST['desc']."',organizer='".strtoupper($_POST['organizer'])."' WHERE tournament_id=".$_POST['ids']."";
         mysql_query($query5,$conn) or die(mysql_error());
 
         echo 'ok';
