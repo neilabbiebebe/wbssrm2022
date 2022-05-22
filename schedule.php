@@ -1,9 +1,13 @@
 <link href="css/bracket-css.css" rel="stylesheet">
+<link href='img/logo/urlogo.png' rel="icon">
 <link href="css/font-awesome.min.css" rel="stylesheet">
 <link href="css/css.css" rel='stylesheet' type='text/css'>
 <link href="css/css1.css" rel='stylesheet' type='text/css'>
 <link href="css/css2.css" rel='stylesheet' type='text/css'>
 <link href="css/css3.css" rel='stylesheet' type='text/css'>
+<script>
+        setInterval(function(){window.location.reload();},2000);
+    </script>
 <head>
 <title>WBSSRM-Schedule</title>
 </head>
@@ -48,7 +52,7 @@
             $sports_flag = 0;
             $query2 = mysql_query("SELECT * FROM tournament_schedule WHERE tournament_id=".$tour_id." AND tour_sports_id=".$row['tour_sports_id']." AND sched_date='".$start_date."' ORDER BY start_time ASC") or die(mysql_error());
             while($row1 = mysql_fetch_array($query2)){
-                $query3 = mysql_query("SELECT a.*,IF(ISNULL(b.team_name),'TBD',b.team_name) AS team_1,IF(ISNULL(IF(b.logo='','nologo.png',b.logo)),'nologo.png',IF(b.logo='','nologo.png',b.logo)) AS logo_1,IF(ISNULL(c.team_name),'TBD',c.team_name) AS team_2,IF(ISNULL(IF(c.logo='','nologo.png',c.logo)),'nologo.png',IF(c.logo='','nologo.png',c.logo)) AS logo_2 FROM tournament_match a LEFT JOIN team b ON a.team_id_1=b.team_id LEFT JOIN team c ON a.team_id_2=c.team_id WHERE a.match_id=".$row1['match_id']) or die(mysql_error());
+                $query3 = mysql_query("SELECT a.*,IF(ISNULL(b.team_acro),'TBD',b.team_acro) AS team_1,IF(ISNULL(IF(b.logo='','nologo.png',b.logo)),'nologo.png',IF(b.logo='','nologo.png',b.logo)) AS logo_1,IF(ISNULL(c.team_acro),'TBD',c.team_acro) AS team_2,IF(ISNULL(IF(c.logo='','nologo.png',c.logo)),'nologo.png',IF(c.logo='','nologo.png',c.logo)) AS logo_2 FROM tournament_match a LEFT JOIN team b ON a.team_id_1=b.team_id LEFT JOIN team c ON a.team_id_2=c.team_id WHERE a.match_id=".$row1['match_id']) or die(mysql_error());
                 $row2 = mysql_fetch_array($query3);
 
                 if($row2['status_1']=='' || $row2['status_2']==''){

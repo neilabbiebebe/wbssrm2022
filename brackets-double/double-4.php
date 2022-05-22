@@ -2,6 +2,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link href='../img/logo/urlogo.png' rel="icon">
 	<link href="../css/bracket-css2.css" rel="stylesheet">
 	<link href="../css/font-awesome.min.css" rel="stylesheet">
 	<link href="../css/css.css" rel='stylesheet' type='text/css'>
@@ -22,9 +23,22 @@
 
 		@media print
 		{    
+			/* @page {size: landscape} */
 			.no-print, .no-print *
 			{
 				display: none !important;
+			}
+			.head, .head *
+			{
+				display: none !important;
+			}
+			.for-print, .for-print *
+			{
+				display: inline !important;
+			}
+			.for-print2, .for-print2 *
+			{
+				display: block !important;
 			}
 		}
 	</style>
@@ -52,7 +66,10 @@
     $query = mysql_query("SELECT a.*,c.sports_name,d.venue_name FROM tournament_sports a INNER JOIN sports c ON a.sports_id=c.sports_id INNER JOIN venue d ON a.venue_id=d.venue_id WHERE tour_sports_id=".$tour_sports_id." AND tournament_id=".$tour_id) or die(mysql_error());
     $result = mysql_fetch_array($query);
 ?>
-	<section id="bracket">
+<center><img class="for-print" src="../img/slogo.png" style="display:none;padding-top:15px"/></center><br/>
+	<center><p class="year for-print" style="font-size:17px;padding-top:10px;display:none">BISU Balilihan Campus</i></p></center>
+	<center><p class="year for-print" style="font-size:17px;padding-top:20px;display:none">Magsija Balilihan Bohol</i></p></center>
+	<section id="bracket" style="margin-bottom:-50px">
 	<p class="intro" id="intro"><?php echo $result1['tournament_name']; ?> - <span id="headline"><?php echo $result['sports_name']; ?></span></p>
 	<!-- <h1 id="headline">Basketball</h1> -->
 		 <p class="year"><?php echo $result['tournament_type']; ?></i></p>

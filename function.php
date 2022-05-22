@@ -958,7 +958,7 @@
         echo 'okay';
     }
     elseif(isset($_GET['tag_winner'])){
-        $query = mysql_query("SELECT a.*,IFNULL(b.team_name,'TBD') AS team_1,IFNULL(c.team_name,'TBD') AS team_2 FROM tournament_match a LEFT JOIN team b ON a.team_id_1=b.team_id LEFT JOIN team c ON a.team_id_2=c.team_id WHERE a.match_id=".$_POST['ids']) or die(mysql_error());
+        $query = mysql_query("SELECT a.*,IFNULL(b.team_acro,'TBD') AS team_1,IFNULL(c.team_acro,'TBD') AS team_2 FROM tournament_match a LEFT JOIN team b ON a.team_id_1=b.team_id LEFT JOIN team c ON a.team_id_2=c.team_id WHERE a.match_id=".$_POST['ids']) or die(mysql_error());
         $row = mysql_fetch_array($query);
         echo '<input type="hidden" class="form-control" name="mid" id="mid" autocomplete="off" value="'.$_POST['ids'].'">
         <input type="hidden" class="form-control" name="tid" id="tid" autocomplete="off" value="'.$_POST['ids2'].'">

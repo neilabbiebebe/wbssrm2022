@@ -1,6 +1,8 @@
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link href='img/logo/urlogo.png' rel="icon">
 <link href="css/bracket-css.css" rel="stylesheet">
 <link href="css/font-awesome.min.css" rel="stylesheet">
 <link href="css/css.css" rel='stylesheet' type='text/css'>
@@ -65,7 +67,7 @@ tr:nth-child(even) {
 
     $array = [];
 
-    $query1 = mysql_query("SELECT a.*,b.team_name,IF(b.logo='','nologo.png',b.logo) AS logo FROM tournament_team a INNER JOIN team b ON a.team_id=b.team_id WHERE tour_sports_id=".$tour_sports_id." AND tournament_id=".$tour_id) or die(mysql_error());
+    $query1 = mysql_query("SELECT a.*,b.team_acro,IF(b.logo='','nologo.png',b.logo) AS logo FROM tournament_team a INNER JOIN team b ON a.team_id=b.team_id WHERE tour_sports_id=".$tour_sports_id." AND tournament_id=".$tour_id) or die(mysql_error());
     while($row1 = mysql_fetch_array($query1)){
 
     $query2 = mysql_query("SELECT count(*) AS wins FROM `tournament_match` WHERE team_id_1 = ".$row1['team_id']." AND status_1='winner' AND tour_sports_id=".$tour_sports_id." AND tournament_id=".$tour_id) or die(mysql_error());
@@ -83,7 +85,7 @@ tr:nth-child(even) {
     $win_total = $row2['wins'] + $row3['wins'];
     $loss_total = $row4['loss'] + $row5['loss'];
 
-    $array[] = array('logo' => $row1['logo'], 'name' => $row1['team_name'], 'win' => $win_total, 'loss' => $loss_total);
+    $array[] = array('logo' => $row1['logo'], 'name' => $row1['team_acro'], 'win' => $win_total, 'loss' => $loss_total);
 
     }
 

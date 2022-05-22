@@ -29,7 +29,7 @@
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard">
         <div class="sidebar-brand-icon">
-          <img src="img/lg.png">
+          <img src="img/logo/urlogo.png">
         </div>
         <div class="sidebar-brand-text mx-3">WBSSRM</div>
       </a>

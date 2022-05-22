@@ -13,7 +13,7 @@
   $result1 = mysql_fetch_array($query3);
 ?>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Tournament Matches<br/><a href="tournament_sports.php?tour_id=<?php echo $tour_id; ?>"><button class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i>&nbsp;&nbsp;Go Back</button></a></h1>
+    <h1 class="h3 mb-0 text-gray-800">Tournament Matches<br/><a href="tournament_sports?tour_id=<?php echo $tour_id; ?>"><button class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i>&nbsp;&nbsp;Go Back</button></a></h1>
     
     <!-- <ol class="breadcrumb"> -->
         <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#addTournamentModal" data-backdrop="static" onclick=addtournament()><i class="fa fa-circle"></i>&nbsp;&nbsp;Add Tournament</button> -->
@@ -35,7 +35,7 @@
             <table class="table align-items-center table-flush table-hover" id="dataTable2">
             <thead class="thead-light">
                 <tr style="text-align:center">
-                <th>Match #</th>
+                <th>Game</th>
                 <th>Participant</th>
                 <th style="width:10px;text-align:center"></th>
                 <th>Participant</th>
@@ -48,7 +48,7 @@
                 <?php
                     include_once('session/dbconnect.php');
 
-                    $query = mysql_query("SELECT a.*,IFNULL(b.team_name,'TBD') AS team_1,IFNULL(c.team_name,'TBD') AS team_2 FROM tournament_match a LEFT JOIN team b ON a.team_id_1=b.team_id LEFT JOIN team c ON a.team_id_2=c.team_id WHERE a.tour_sports_id=".$tour_sports_id." AND a.tournament_id=".$tour_id) or die(mysql_error());
+                    $query = mysql_query("SELECT a.*,IFNULL(b.team_acro,'TBD') AS team_1,IFNULL(c.team_acro,'TBD') AS team_2 FROM tournament_match a LEFT JOIN team b ON a.team_id_1=b.team_id LEFT JOIN team c ON a.team_id_2=c.team_id WHERE a.tour_sports_id=".$tour_sports_id." AND a.tournament_id=".$tour_id) or die(mysql_error());
                     while($row = mysql_fetch_array($query))
                     {
                         $query4 = mysql_query("SELECT * FROM tournament_schedule WHERE match_id=".$row['match_id']) or die(mysql_error());

@@ -1856,10 +1856,12 @@ function generatesched()
                         if(sel=='All')
                         {
                             window.open('schedule?ids='+tid+'&tstart='+tstart+'&tend='+tend+'&sel=All', '_blank');
+                           
                         }
                         else
                         {
                             window.open('schedule?ids='+tid+'&tstart='+tstart+'&tend='+tend+'&sel=Single&sid='+sport, '_blank');
+                           
                         }
                     }
                 }
@@ -2002,10 +2004,12 @@ function viewbracket(tourid,tsid,tourtype,cnt)
     if(tourtype=='round')
     {
         window.open('round-robin?ids='+tourid+'&ids2='+tsid, '_blank');
+       
     }
     else
     {
         window.open('brackets-'+tourtype+'/'+tourtype+'-'+cnt+'?ids='+tourid+'&ids2='+tsid, '_blank');
+       
     }
 }
 

@@ -1,9 +1,9 @@
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link href="../css/bracket-css2.css" rel="stylesheet">
+	<link href='../img/logo/urlogo.png' rel="icon">
 	<link href="../css/font-awesome.min.css" rel="stylesheet">
 	<link href="../css/css.css" rel='stylesheet' type='text/css'>
 	<link href="../css/css1.css" rel='stylesheet' type='text/css'>
