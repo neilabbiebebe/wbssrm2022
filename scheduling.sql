@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2022 at 12:28 PM
+-- Generation Time: May 22, 2022 at 02:46 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -41,11 +41,12 @@ INSERT INTO `sports` (`sports_id`, `sports_name`) VALUES
 (1, 'BASKETBALL'),
 (4, 'BASEBALL'),
 (5, 'VOLLEYBALL'),
-(6, 'BADMINTONqweqwe'),
 (7, 'LAWN TENNIS'),
 (8, 'SEPAK TAKRAW'),
 (9, 'FOOTSAL'),
-(10, 'FOOTBALL');
+(10, 'FOOTBALL'),
+(13, 'BADMINTON'),
+(14, 'CHESS');
 
 -- --------------------------------------------------------
 
@@ -56,7 +57,7 @@ INSERT INTO `sports` (`sports_id`, `sports_name`) VALUES
 CREATE TABLE `team` (
   `team_id` int(11) NOT NULL,
   `team_name` varchar(50) NOT NULL,
-  `team_acro` varchar(10) NOT NULL,
+  `team_acro` varchar(25) NOT NULL,
   `team_coach` varchar(50) NOT NULL,
   `coach_contact` varchar(50) NOT NULL,
   `logo` text NOT NULL
@@ -67,13 +68,13 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`team_id`, `team_name`, `team_acro`, `team_coach`, `coach_contact`, `logo`) VALUES
-(1, 'JAVA', 'JAVA', 'JERRY ALE', '09234378910', 'java1.png'),
-(2, 'JAVASCRIPT', 'JAVASCRIPT', 'BENJAMIN OMAMALIN', '09567493820', 'js1.png'),
-(3, 'PHP', 'PHP', 'SHELLA OLAGUIR', '09343386659', 'php1.png'),
-(4, 'PYTHON', 'PYTHON', 'GABRENE DIAZ', '09546586058', 'python1.png'),
-(5, 'RUBY', 'RUBY', 'IVY JANE ASILO', '09435565778', 'ruby1.png'),
-(6, 'SWIFT', 'SWIFT', 'EVANGELINE LUMANTAS', '09339844691', 'swift1.png'),
-(8, 'KOTLIN', 'KOTLIN', 'JHONMAR AVERGONZADO', '09667759670', 'kotlin.jpeg');
+(19, 'BISU BALILIHAN CAMPUS', 'BALILIHAN', 'Benjamin Omamalin', '09051500167', 'bisu.png'),
+(20, 'BISU MAIN CAMPUS', 'MAIN', 'Tagbilaran', '09245647302', 'swift.png'),
+(21, 'BISU BILAR CAMPUS', 'BILAR', 'Bilar', '09274930271', 'js.png'),
+(22, 'BISU CANDIJAY CAMPUS', 'CANDIJAY', 'Candijay', '09937495036', 'python.jpeg'),
+(23, 'BISU CLARIN CAMPUS', 'CLARIN', 'Clarin', '09687950656', 'ruby2.jpeg'),
+(24, 'BISU CALAPE CAMPUS', 'CALAPE', 'Calape', '09247593045', 'php.jpeg'),
+(25, 'HOLY NAME UNIVERSITY', 'HNU', 'Esptepa', '09284957483', '');
 
 -- --------------------------------------------------------
 
@@ -94,9 +95,7 @@ CREATE TABLE `team_sports` (
 --
 
 INSERT INTO `team_sports` (`team_sports_id`, `team_id`, `sports_id`, `coach_name`, `contact_no`) VALUES
-(5, 11, 1, 'John Prats', '213213'),
-(6, 11, 4, 'John John', '093213215'),
-(7, 1, 4, 'GARAONwe', '09516422411');
+(14, 16, 13, 'w', '09092867423');
 
 -- --------------------------------------------------------
 
@@ -119,7 +118,7 @@ CREATE TABLE `tournament` (
 --
 
 INSERT INTO `tournament` (`tournament_id`, `tournament_name`, `start_date`, `end_date`, `description`, `organizer`, `date_added`) VALUES
-(5, 'INTRAMURAL GAMES 2022', '2022-05-13', '2022-05-16', 'LOREM IPSUM', 'BISU BALILIHAN', '04/12/2022');
+(7, 'SCUAA 2022', '2022-05-21', '2022-05-27', 'lorem ipsum', 'BISU', '05/21/2022');
 
 -- --------------------------------------------------------
 
@@ -143,21 +142,58 @@ CREATE TABLE `tournament_match` (
 --
 
 INSERT INTO `tournament_match` (`match_id`, `tournament_id`, `tour_sports_id`, `team_id_1`, `status_1`, `team_id_2`, `status_2`, `bracket_no`) VALUES
-(121, 5, 16, 2, 'winner', 3, 'losser', 1),
-(122, 5, 16, 1, 'losser', 8, 'winner', 2),
-(123, 5, 16, 2, '', 8, '', 3),
-(124, 5, 17, 8, 'losser', 3, 'winner', 1),
-(125, 5, 17, 2, '', 1, '', 2),
-(126, 5, 17, 8, '', 0, '', 3),
-(127, 5, 17, 3, '', 0, '', 4),
-(128, 5, 17, 0, '', 0, '', 5),
-(129, 5, 17, 0, '', 0, '', 6),
-(130, 5, 18, 1, '', 2, '', 0),
-(131, 5, 18, 1, '', 8, '', 0),
-(132, 5, 18, 2, '', 1, '', 0),
-(133, 5, 18, 2, '', 8, '', 0),
-(134, 5, 18, 8, '', 1, '', 0),
-(135, 5, 18, 8, '', 2, '', 0);
+(301, 7, 48, 22, 'losser', 19, 'winner', 1),
+(302, 7, 48, 23, 'winner', 24, 'losser', 2),
+(303, 7, 48, 24, 'losser', 22, 'winner', 3),
+(304, 7, 48, 21, 'winner', 22, 'losser', 4),
+(305, 7, 48, 23, 'losser', 21, 'winner', 5),
+(306, 7, 48, 19, '', 23, '', 6),
+(307, 7, 48, 20, '', 21, '', 7),
+(308, 7, 48, 23, '', 19, '', 8),
+(309, 7, 48, 24, '', 21, '', 9),
+(310, 7, 48, 19, '', 22, '', 10),
+(311, 7, 48, 21, '', 23, '', 11),
+(312, 7, 48, 19, '', 24, '', 12),
+(313, 7, 48, 19, '', 20, '', 13),
+(314, 7, 48, 22, '', 20, '', 14),
+(315, 7, 48, 24, '', 19, '', 15),
+(316, 7, 48, 19, '', 21, '', 16),
+(317, 7, 48, 22, '', 23, '', 17),
+(318, 7, 48, 20, '', 24, '', 18),
+(319, 7, 48, 23, '', 20, '', 19),
+(320, 7, 48, 20, '', 19, '', 20),
+(321, 7, 48, 22, '', 21, '', 21),
+(322, 7, 48, 20, '', 22, '', 22),
+(323, 7, 48, 22, '', 24, '', 23),
+(324, 7, 48, 20, '', 23, '', 24),
+(325, 7, 48, 21, '', 24, '', 25),
+(326, 7, 48, 21, '', 20, '', 26),
+(327, 7, 48, 24, '', 23, '', 27),
+(328, 7, 48, 24, '', 20, '', 28),
+(329, 7, 48, 23, '', 22, '', 29),
+(330, 7, 48, 21, '', 19, '', 30),
+(331, 7, 49, 24, 'winner', 23, 'losser', 1),
+(332, 7, 49, 19, 'winner', 20, 'losser', 2),
+(333, 7, 49, 21, 'winner', 24, 'losser', 3),
+(334, 7, 49, 22, 'losser', 19, 'winner', 4),
+(335, 7, 49, 20, 'winner', 24, 'losser', 5),
+(336, 7, 49, 23, 'winner', 22, 'losser', 6),
+(337, 7, 49, 23, 'losser', 20, 'winner', 7),
+(338, 7, 49, 21, 'losser', 19, 'winner', 8),
+(339, 7, 49, 21, 'losser', 20, 'winner', 9),
+(340, 7, 49, 19, 'winner', 20, 'losser', 10),
+(341, 7, 50, 24, '', 25, '', 1),
+(342, 7, 50, 19, '', 22, '', 2),
+(343, 7, 50, 23, '', 21, '', 3),
+(344, 7, 50, 0, '', 0, '', 4),
+(345, 7, 50, 20, '', 0, '', 5),
+(346, 7, 50, 0, '', 0, '', 6),
+(347, 7, 50, 0, '', 0, '', 7),
+(348, 7, 50, 0, '', 0, '', 8),
+(349, 7, 50, 0, '', 0, '', 9),
+(350, 7, 50, 0, '', 0, '', 10),
+(351, 7, 50, 0, '', 0, '', 11),
+(352, 7, 50, 0, '', 0, '', 12);
 
 -- --------------------------------------------------------
 
@@ -182,11 +218,21 @@ CREATE TABLE `tournament_schedule` (
 --
 
 INSERT INTO `tournament_schedule` (`schedule_id`, `match_id`, `tournament_id`, `tour_sports_id`, `venue_id`, `sched_date`, `start_time`, `end_time`, `date_added`) VALUES
-(1, 121, 5, 16, 1, '2022-04-21', '07:30', '08:30', '04/20/2022'),
-(2, 122, 5, 16, 1, '2022-04-20', '21:08', '22:08', '04/20/2022'),
-(3, 123, 5, 16, 1, '2022-04-22', '13:00', '14:00', '04/22/2022'),
-(4, 124, 5, 17, 1, '2022-05-13', '18:00', '19:00', '05/13/2022'),
-(5, 125, 5, 17, 1, '2022-05-13', '20:00', '21:00', '05/13/2022');
+(1, 301, 7, 48, 1, '2022-05-22', '08:30', '09:30', '05/22/2022'),
+(2, 302, 7, 48, 1, '2022-05-22', '09:45', '10:45', '05/22/2022'),
+(3, 331, 7, 49, 3, '2022-05-22', '08:15', '09:14', '05/22/2022'),
+(4, 303, 7, 48, 1, '2022-05-22', '11:00', '12:00', '05/22/2022'),
+(5, 304, 7, 48, 1, '2022-05-22', '13:00', '14:00', '05/22/2022'),
+(6, 332, 7, 49, 3, '2022-05-22', '09:15', '10:15', '05/22/2022'),
+(7, 333, 7, 49, 3, '2022-05-22', '10:20', '11:20', '05/22/2022'),
+(8, 334, 7, 49, 3, '2022-05-22', '13:00', '14:00', '05/22/2022'),
+(9, 335, 7, 49, 3, '2022-05-22', '14:20', '15:20', '05/22/2022'),
+(10, 336, 7, 49, 3, '2022-05-22', '15:30', '16:30', '05/22/2022'),
+(11, 337, 7, 49, 3, '2022-05-23', '07:30', '08:30', '05/22/2022'),
+(12, 338, 7, 49, 3, '2022-05-23', '08:45', '09:45', '05/22/2022'),
+(13, 339, 7, 49, 3, '2022-05-23', '10:00', '11:00', '05/22/2022'),
+(14, 340, 7, 49, 3, '2022-05-23', '13:00', '14:00', '05/22/2022'),
+(15, 305, 7, 48, 1, '2022-05-22', '20:07', '21:07', '05/22/2022');
 
 -- --------------------------------------------------------
 
@@ -211,9 +257,9 @@ CREATE TABLE `tournament_sports` (
 --
 
 INSERT INTO `tournament_sports` (`tour_sports_id`, `tournament_id`, `sports_id`, `description`, `manager`, `venue_id`, `tournament_type`, `no_of_teams`, `date_added`) VALUES
-(16, 5, 1, 'aw', 'lao', 1, 'Single Elimination', 4, '04/20/2022'),
-(17, 5, 4, 'a', 'qwe', 1, 'Double Elimination', 4, '04/22/2022'),
-(18, 5, 5, 'f', 'weriwu', 3, 'Round Robin', 3, '04/22/2022');
+(48, 7, 1, '', 'Benigno Olaguir', 1, 'Round Robin', 6, '05/22/2022'),
+(49, 7, 5, 'awds', 'johhnny', 3, 'Double Elimination', 6, '05/22/2022'),
+(50, 7, 10, '', 'Avergonzado', 4, 'Double Elimination', 7, '05/22/2022');
 
 -- --------------------------------------------------------
 
@@ -233,17 +279,25 @@ CREATE TABLE `tournament_team` (
 --
 
 INSERT INTO `tournament_team` (`tour_team_id`, `tournament_id`, `tour_sports_id`, `team_id`) VALUES
-(76, 5, 16, 1),
-(77, 5, 16, 2),
-(78, 5, 16, 8),
-(79, 5, 16, 3),
-(80, 5, 17, 1),
-(81, 5, 17, 2),
-(82, 5, 17, 8),
-(83, 5, 17, 3),
-(84, 5, 18, 1),
-(85, 5, 18, 2),
-(86, 5, 18, 8);
+(197, 7, 48, 19),
+(198, 7, 48, 21),
+(199, 7, 48, 24),
+(200, 7, 48, 22),
+(201, 7, 48, 23),
+(202, 7, 48, 20),
+(203, 7, 49, 19),
+(204, 7, 49, 21),
+(205, 7, 49, 24),
+(206, 7, 49, 22),
+(207, 7, 49, 23),
+(208, 7, 49, 20),
+(209, 7, 50, 19),
+(210, 7, 50, 21),
+(211, 7, 50, 24),
+(212, 7, 50, 22),
+(213, 7, 50, 23),
+(214, 7, 50, 20),
+(215, 7, 50, 25);
 
 -- --------------------------------------------------------
 
@@ -266,7 +320,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `full_name`, `status`, `date_added`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'Active', '02/08/2022'),
-(3, 'admin321', '8ab8482bdf8da7474f312f5fc9520325', 'Papa John', 'Active', '02/11/2022');
+(4, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'User', 'Inactive', '05/21/2022');
 
 -- --------------------------------------------------------
 
@@ -285,9 +339,10 @@ CREATE TABLE `venue` (
 --
 
 INSERT INTO `venue` (`venue_id`, `venue_name`, `venue_address`) VALUES
-(1, 'BALILIHAN COVERED COURT123', 'MAGSIJA BALILIHAN BOHOL123'),
-(2, 'BALILIHAN TENNIS COURT', 'MAGSIJA BALILIHAN BOHOL'),
-(3, 'BALILIHAN VOLLEYBALL COURT', 'MAGSIJA BALILIHAN BOHOL');
+(1, 'BALILIHAN COVERED COURT', 'MAGSIJA BALILIHAN BOHOL'),
+(2, 'BALILIHAN BADMINTON COURT', 'MAGSIJA BALILIHAN BOHOL'),
+(3, 'BALILIHAN VOLLEYBALL COURT', 'MAGSIJA BALILIHAN BOHOL'),
+(4, 'BALILIHAN OPEN FIELD', 'MAAGSIJA BALILIHAN BOHOL');
 
 --
 -- Indexes for dumped tables
@@ -361,61 +416,61 @@ ALTER TABLE `venue`
 -- AUTO_INCREMENT for table `sports`
 --
 ALTER TABLE `sports`
-  MODIFY `sports_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `sports_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `team_sports`
 --
 ALTER TABLE `team_sports`
-  MODIFY `team_sports_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `team_sports_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tournament`
 --
 ALTER TABLE `tournament`
-  MODIFY `tournament_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `tournament_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tournament_match`
 --
 ALTER TABLE `tournament_match`
-  MODIFY `match_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `match_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=353;
 
 --
 -- AUTO_INCREMENT for table `tournament_schedule`
 --
 ALTER TABLE `tournament_schedule`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tournament_sports`
 --
 ALTER TABLE `tournament_sports`
-  MODIFY `tour_sports_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `tour_sports_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tournament_team`
 --
 ALTER TABLE `tournament_team`
-  MODIFY `tour_team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `tour_team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `venue`
 --
 ALTER TABLE `venue`
-  MODIFY `venue_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `venue_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
