@@ -13,7 +13,7 @@
   $result1 = mysql_fetch_array($query3);
 ?>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Tournament Matches<br/><a href="tournament_sports?tour_id=<?php echo $tour_id; ?>"><button class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i>&nbsp;&nbsp;Go Back</button></a></h1>
+    <h1 class="h3 mb-0 text-gray-800">Tournament Matches<br/><a href="tournament_sports.php?tour_id=<?php echo $tour_id; ?>"><button class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i>&nbsp;&nbsp;Go Back</button></a></h1>
     
     <!-- <ol class="breadcrumb"> -->
         <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#addTournamentModal" data-backdrop="static" onclick=addtournament()><i class="fa fa-circle"></i>&nbsp;&nbsp;Add Tournament</button> -->
@@ -48,6 +48,9 @@
                 <?php
                     include_once('session/dbconnect.php');
 
+                    $query5 = mysql_query("SELECT count(*) FROM `tournament_match` WHERE tour_sports_id = ".$tour_sports_id." AND (status_1='' OR status_2='')") or die(mysql_error());
+                    $row3 = mysql_fetch_array($query5);
+
                     $query = mysql_query("SELECT a.*,IFNULL(b.team_acro,'TBD') AS team_1,IFNULL(c.team_acro,'TBD') AS team_2 FROM tournament_match a LEFT JOIN team b ON a.team_id_1=b.team_id LEFT JOIN team c ON a.team_id_2=c.team_id WHERE a.tour_sports_id=".$tour_sports_id." AND a.tournament_id=".$tour_id) or die(mysql_error());
                     while($row = mysql_fetch_array($query))
                     {
@@ -67,9 +70,10 @@
                                     <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#setScheduleModal" onclick=setschedule(<?php echo $row['match_id']; ?>,<?php echo $row['tour_sports_id']; ?>,<?php echo $row['tournament_id']; ?>,<?php echo $result1['venue_id']; ?>)><i class="fa fa-clock"></i>  Set Schedule</button>
                                     <?php } ?>
                                     <?php if($row1>0){?>
-                                        <?php if($row['team_1']!='TBD' && $row['team_2']!='TBD'){ ?>
+                                        <?php if($row['team_1']!='TBD' && $row['team_2']!='TBD'){
+                                            if($row3[0] > 0){ ?>
                                     <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#tagWinnerModal" onclick=tagwinner(<?php echo $row['match_id']; ?>,<?php echo $row['tour_sports_id']; ?>)><i class="fa fa-pen"></i>  Tag Winner</button>
-                                <?php }} ?>
+                                <?php }}} ?>
                             </td>
                         </tr>
                     <?php
