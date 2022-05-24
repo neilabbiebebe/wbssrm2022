@@ -13,7 +13,7 @@
   $result1 = mysql_fetch_array($query3);
 ?>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Tournament Matches<br/><a href="tournament_sports.php?tour_id=<?php echo $tour_id; ?>"><button class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i>&nbsp;&nbsp;Go Back</button></a></h1>
+    <h1 class="h3 mb-0 text-gray-800">Tournament Matches<br/><a href="tournament_sports?tour_id=<?php echo $tour_id; ?>"><button class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i>&nbsp;&nbsp;Go Back</button></a></h1>
     
     <!-- <ol class="breadcrumb"> -->
         <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#addTournamentModal" data-backdrop="static" onclick=addtournament()><i class="fa fa-circle"></i>&nbsp;&nbsp;Add Tournament</button> -->
